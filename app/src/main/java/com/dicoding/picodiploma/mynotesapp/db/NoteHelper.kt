@@ -5,10 +5,10 @@ import android.content.Context
 import android.database.Cursor
 import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
-import com.dicoding.picodiploma.mynotesapp.db.DatabaseContract.NoteColums.Companion.TABLE_NAME
-import com.dicoding.picodiploma.mynotesapp.db.DatabaseContract.NoteColums.Companion._ID
+import com.dicoding.picodiploma.mynotesapp.db.DatabaseContract.NoteColumns.Companion._ID
+import com.dicoding.picodiploma.mynotesapp.db.DatabaseContract.NoteColumns.Companion.TABLE_NAME
 
-class NoteHelper (context: Context){
+class NoteHelper(context: Context) {
 
     private var dataBaseHelper: DatabaseHelper = DatabaseHelper(context)
     private lateinit var database: SQLiteDatabase
@@ -16,11 +16,11 @@ class NoteHelper (context: Context){
     companion object {
         private const val DATABASE_TABLE = TABLE_NAME
         private var INSTANCE: NoteHelper? = null
-        fun getInstance(context: Context): NoteHelper =
-                INSTANCE ?: synchronized(this) {
-                    INSTANCE ?: NoteHelper(context)
-                }
 
+        fun getInstance(context: Context): NoteHelper =
+            INSTANCE ?: synchronized(this) {
+                INSTANCE ?: NoteHelper(context)
+            }
     }
 
     @Throws(SQLException::class)
@@ -37,14 +37,14 @@ class NoteHelper (context: Context){
 
     fun queryAll(): Cursor {
         return database.query(
-                DATABASE_TABLE,
-                null,
-                null,
-                null,
-                null,
-                null,
-                "$_ID ASC"
-        )
+            DATABASE_TABLE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "$_ID ASC",
+            null)
     }
 
     fun queryById(id: String): Cursor {
